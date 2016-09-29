@@ -1,0 +1,56 @@
+﻿** Structure ENVI_MAP_INFO_STRUCT, 11 tags, length=352, data length=322:
+   PROJ            STRUCT    -> ENVI_PROJ_STRUCT Array[1]
+   MC              DOUBLE    Array[4]
+   PS              DOUBLE    Array[2]
+   ROTATION        DOUBLE           0.0000000
+   PSEUDO          INT              0
+   KX              DOUBLE    Array[2, 2]
+   KY              DOUBLE    Array[2, 2]
+   BEST_ROOT       INT              0
+   O_RPC           OBJREF    <NullObject>
+   NS              LONG                 0
+   NL              LONG                 0
+** Structure <2219ee8>, 21 tags, length=176, data length=172, refs=1:
+   MODELPIXELSCALETAG
+                   DOUBLE    Array[3]
+   MODELTIEPOINTTAG
+                   DOUBLE    Array[6, 1]
+   GTMODELTYPEGEOKEY
+                   INT              1
+   GTRASTERTYPEGEOKEY
+                   INT              2
+   GTCITATIONGEOKEY
+                   STRING    'AEA        North American Datum 1983'
+   GEOGRAPHICTYPEGEOKEY
+                   INT           4269
+   GEOGGEODETICDATUMGEOKEY
+                   INT           6269
+   GEOGLINEARUNITSGEOKEY
+                   INT           9001
+   GEOGANGULARUNITSGEOKEY
+                   INT           9102
+   PROJECTEDCSTYPEGEOKEY
+                   INT          32767
+   PROJECTIONGEOKEY
+                   INT          32767
+   PROJCOORDTRANSGEOKEY
+                   INT             11
+   PROJLINEARUNITSGEOKEY
+                   INT           9001
+   PROJSTDPARALLEL1GEOKEY
+                   DOUBLE           65.000000
+   PROJSTDPARALLEL2GEOKEY
+                   DOUBLE           55.000000
+   PROJNATORIGINLONGGEOKEY
+                   DOUBLE          -154.00000
+   PROJNATORIGINLATGEOKEY
+                   DOUBLE           50.000000
+   PROJFALSEEASTINGGEOKEY
+                   DOUBLE           0.0000000
+   PROJFALSENORTHINGGEOKEY
+                   DOUBLE           0.0000000
+   PROJFALSEORIGINLONGGEOKEY
+                   DOUBLE           0.0000000
+   PROJFALSEORIGINLATGEOKEY
+                   DOUBLE           0.0000000
+

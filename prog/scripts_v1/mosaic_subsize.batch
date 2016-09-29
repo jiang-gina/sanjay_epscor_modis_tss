@@ -1,0 +1,85 @@
+#!/bin/bash
+#jzhu, 2015/5/28
+#This script mosaic tile files and subsize. it output the same format file.
+#it accept three parameters: src_dir, dees_dir, date_str.
+#date_str in yyyymmdd format.
+
+
+
+
+raw_data_dir=/home/jiang/projects/sanjay/data_v2
+
+out_data_dir=/home/jiang/projects/sanjay/data_1
+
+date_str=2015136  #yyyydoy
+
+# check input parameters
+
+if [ $# != 3 ]; then 
+
+echo
+echo "this script take three parameters: src_dir,des_dir,date_str"
+echo
+exit 1
+fi
+
+raw_data_dir=$1
+
+out_data_dir=$2
+
+date_str=$3
+
+
+
+if [ ! -d "$raw_data_dir" ]; then 
+echo
+echo "the data directory does not exist"
+echo
+exit 1
+fi
+
+#create output directroy
+
+mkdir -p $out_data_dir
+
+#create file list
+
+ls $raw_data_dir/*$date_str*.hdf>flist
+
+item=${date_str}
+
+#1. mosaic tile files 
+
+/home/jiang/apps/mrt/bin/mrtmosaic -i flist -o ${item}.hdf
+
+#2. optional, reprojection to EPSG:3338
+
+echo "INPUT_FILENAME = ${item}.hdf" > K.prm
+echo "SPECTRAL_SUBSET = ( 1 1 1 1 1)" >> K.prm
+echo "SPATIAL_SUBSET_TYPE = INPUT_LAT_LONG" >> K.prm
+echo "SPATIAL_SUBSET_UL_CORNER = ( 71.5 -179.9 )" >> K.prm
+echo "SPATIAL_SUBSET_LR_CORNER = ( 50.5 -129.5 )" >> K.prm
+echo "OUTPUT_FILENAME = Test.hdf" >> K.prm
+echo "RESAMPLING_TYPE = NEAREST_NEIGHBOR" >> K.prm
+echo "OUTPUT_PROJECTION_TYPE = AEA" >> K.prm
+echo "OUTPUT_PROJECTION_PARAMETERS = ( 0.0 0.0 65.0 55.0 -154.0 50.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 )" >> K.prm
+echo "DATUM = NAD83" >> K.prm
+echo "OUTPUT_PIXEL_SIZE = 250" >> K.prm
+sed s/Test.hdf/${item}.hdf/ < K.prm > $item.prm
+
+/home/jiang/apps/mrt/bin/resample -f -p $item.prm
+
+
+#mv output files to $data_out_dir
+
+mv $item.hdf $out_data_dir/$item.hdf
+
+#mv ${item}*.tif $out_data_dir
+
+/bin/rm ${item}.prm
+
+/bin/rm flist
+
+/bin/rm *.log
+
+exit

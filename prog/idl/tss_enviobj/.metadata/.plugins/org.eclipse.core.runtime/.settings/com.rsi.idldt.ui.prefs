@@ -1,0 +1,14 @@
+CHROMACODING_VALUES=true
+IDLDT_VALUES=true
+IDL_CPU_VECTOR_ENABLE=1
+IDL_DEVICE=X
+IDL_PATH=<IDL_DEFAULT>\:+/home/jiang/projects/sanjay/prog/idl/tss_enviobj
+IDL_PATH_CACHE_DISABLE=0
+IDL_QUIET=0
+IDL_STARTUP=/home/jiang/projects/sanjay/prog/idl/tss_enviobj/startup.dat
+IDL_VALUES=true
+MACROS_FLOATING_TOOLBAR_HEIGHT=36
+MACROS_FLOATING_TOOLBAR_WIDTH=36
+MACROS_FLOATING_TOOLBAR_X=0
+coolItemsOrder=org.eclipse.ui.workbench.file\:com.rsi.idldt.ui.textedit.toolbar\:com.rsi.idldt.ui.toolbar.debugTools
+eclipse.preferences.version=1

@@ -1,0 +1,161 @@
+;This program stack one year of daily MOD09GQ data. 
+;This program uses object-orientated technoloy
+; 
+; 
+
+pro stack_by_envi, flist
+
+flist='/mnt/old_root/MOD09GQ/2001/2001_flist_num_observations_tst'
+
+; flist is file names of _num_observations
+
+wrkdir=file_dirname(flist)
+
+filen=file_basename(flist)
+
+year=strmid(filen,0,4)
+
+;---- read file names in the flist
+
+nlines = FILE_LINES(flist)
+ 
+sarr = STRARR(nlines)
+
+OPENR, u1, flist,/GET_LUN
+
+READF, u1, sarr
+
+FREE_LUN, u1
+
+
+;--- big loop for nlines
+
+e=ENVI(/HEADLESS)
+
+strn='num_observations'
+strc='obscov_1'
+strq='QC_250m_1'
+str1='sur_refl_b01_1'
+str2='sur_refl_b02_1'
+
+
+
+for i=0, nlines-1 do begin
+
+fn_numobs=sarr[i]
+
+p=strpos(fn_numobs,strn)
+
+len=strlen(fn_numobs)
+
+file_hdr=strmid(fn_numobs,0,p)
+
+file_end =strmid(fn_numobs,p+strlen(strn),len-1-strlen(strn) )
+
+fn_obscov=file_hdr+strc+file_end
+
+fn_qc250=file_hdr+strq+file_end
+
+fn_refl1=file_hdr+str1+file_end
+
+fn_refl2=file_hdr+str2+file_end
+
+;---- read 5 files into ENVIRaster
+
+rn = e.OpenRaster(fn_numobs)
+
+rc = e.OpenRaster(fn_obscov)
+
+rq = e.OpenRaster(fn_qc250)
+
+r1 = e.OpenRaster(fn_refl1)
+
+r2 = e.OpenRaster(fn_refl2)
+
+
+data_b1=r1.getData()
+
+data_b2=r2.getData()
+
+data_q =rq.getData()
+
+
+; process bands 1 and 2 data
+;
+;mask b1 and b2 according to qc250, mask_value=4096, keeps pixel where data_q= mask_value, set others with -9999
+
+mask_value=4096 ;can be changed by user to filter different data
+
+idx=where (data_q EQ mask_value,complement=idx_comp)
+
+
+;subtract minimum value for data_b1 and data_b2
+
+b1min=min(data_b1[idx])
+
+b2min=min(data_b2[idx])
+
+
+data_b1=data_b1-b1min
+
+data_b2=data_b2-b2min
+
+;set no data as -9999
+
+data_b1[idx_comp] =-9999
+
+data_b1[idx_comp] =-9999
+
+
+;--- save modified data 
+
+;Create a new raster from the original
+newFile1 = e.GetTemporaryFilename()
+
+new_r1 = ENVIRaster(data_b1, URI=newFile1, NBANDS=1,INHERITS_FROM=r1)
+
+newFile2 = e.GetTemporaryFilename()
+
+new_r2 = ENVIRaster(data_b2, URI=newFile2, NBANDS=1, INHERITS_FROM=r2)
+
+if i EQ 0 then begin
+  
+  tot_rn=rn
+  tot_rc=rc
+  tot_rq=rq
+  tot_r1=new_r1
+  tot_r2=new_r2
+  Task = ENVITask('BuildBandStack')
+  
+endif else begin
+  
+  
+   stck2enviraster, tot_rn, rn, wrkdir+'/'+year+'_numobsa'
+  
+   stck2enviraster, tot_rc, rc, wrkdir+'/'+year+'_obscova'
+   
+   stck2enviraster, tot_rq, rq, wrkdir+'/'+year+'_qc250a'
+   
+   stck2enviraster, tot_r1, r1, wrkdir+'/'+year+'_refl1a'
+   
+   stck2enviraster, tot_r2, r2, wrkdir+'/'+year+'_refl2a'
+   
+endelse
+
+
+endfor
+
+;---convert envi file pair into geotif file
+
+convert_envi_tif, wrkdir+'/'+year+'_numobsa'
+
+convert_envi_tif, wrkdir+'/'+year+'_obscova'
+
+convert_envi_tif, wrkdir+'/'+year+'_qc250a'
+
+convert_envi_tif, wrkdir+'/'+year+'_refl1a'
+
+convert_envi_tif, wrkdir+'/'+year+'_refl2a'
+
+
+end

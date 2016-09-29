@@ -1,0 +1,61 @@
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Sat Aug  8 11:52:51 2015
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          2002003.hdf
+output_filename:         2002003_se_ak_aea.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  AEA
+output_datum:            NAD83 - CONUS
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 65.00 55.00 -154.00 50.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  60.00 -160.00 
+    UR:  60.00 -120.00 
+    LL:  50.00 -124.46 
+    LR:  50.00 -93.34 
+
+input image spatial subset corners (lat/lon):
+    UL:  60.56 -140.57 
+    UR:  58.47 -127.28 
+    LL:  55.96 -142.26 
+    LR:  54.10 -130.41 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) num_observations   1   INT8  4800  9600 231.6564      0    127     -1
+  2) sur_refl_b01_1     1  INT16  4800  9600 231.6564   -100  16000 -28672
+  3) sur_refl_b02_1     1  INT16  4800  9600 231.6564   -100  16000 -28672
+  4) QC_250m_1          1 UINT16  4800  9600 231.6564      0   4096   2995
+  5) obscov_1           1   INT8  4800  9600 231.6564      0    100     -1
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+ALBERS CONICAL EQUAL-AREA PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314140 meters
+   1st Standard Parallel:     65.000000 degrees
+   2nd Standard Parallel:     55.000000 degrees
+   Longitude of Central Meridian:     -154.000000 degrees
+   Latitude  of Origin:     50.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band num_observations

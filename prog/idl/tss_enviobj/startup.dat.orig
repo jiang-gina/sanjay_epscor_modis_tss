@@ -1,0 +1,2 @@
+ENVI, /RESTORE_BASE_SAVE_FILES
+PREF_SET, 'IDL_PATH', '<IDL_DEFAULT>:+/home/jiang/projects/sanjay/prog/idl/tss_enviobj', /COMMIT

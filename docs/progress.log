@@ -1,0 +1,12 @@
+7/20/2015,
+ found file size for 2007 is double of rest year. I found the code in stack_one_year_enviobj.pro.
+ when I choose /exclusive keyword in following statement, program will fail. I have to eliminate the keyword, the program can work.
+    envi_doit, 'envi_layer_stacking_doit', /invisible,/exclusive, $
+    fid=flistn.fid, pos=flistn.pos, dims=flistn.dims,$
+    out_dt=out_dt, out_name=out_name,out_bname=flistn.bname, $
+    interp=2, out_ps=out_ps, $
+    out_proj=out_proj, r_fid=tot_layer_fid  
+
+But it produce double size of file.
+
+The file size of 2012 are also double of the size of other year. 

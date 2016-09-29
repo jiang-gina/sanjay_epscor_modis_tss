@@ -1,0 +1,41 @@
+
+#The "INPUT_FILENAMES" field would be commented. If you want to load multiple input files please uncomment the "INPUT_FILENAMES" field and comment the"INPUT_FILENAME" field. 
+#Also the "ORIG_SPECTRAL_SUBSET" field needs to be uncommented and changed to "SPECTRAL_SUBSET". The initial "SPECTRAL_SUBSET" field should be deleted.
+
+#INPUT_FILENAMES = ( /home/jiang/projects/sanjay/data_v2/MOD09GQ.A2015136.h10v02.005.2015139015322.hdf /home/jiang/projects/sanjay/data_v2/MOD09GQ.A2015136.h11v02.005.2015139024441.hdf )
+
+#Southeast of Alaska study area defined in alaska AEA projection.
+##UL (x=728616, y=1249215), RL(x=1512843,725339). These values are gotten within ArcGIS map.
+#
+##define retangle in SIN cover southeast of Alaska
+##UL (-153.276899, 59.816593), RL(-116.826162, 54.410898)
+
+
+INPUT_FILENAME = /mnt/old_root/MOD09GQ/2001/01/2001.01.01/2001001.hdf
+
+SPECTRAL_SUBSET = ( 1 1 1 1 1 )
+#ORIG_SPECTRAL_SUBSET = ( 1 1 1 1 1 )
+
+SPATIAL_SUBSET_TYPE = OUTPUT_PROJ_COORDS
+
+SPATIAL_SUBSET_UL_CORNER = ( 728616  1249215 )
+SPATIAL_SUBSET_LR_CORNER = ( 1512843 725339 )
+
+OUTPUT_FILENAME = /mnt/old_root/MOD09GQ/2001/01/2001.01.01/2001001_bennersxx.tif
+
+RESAMPLING_TYPE = NEAREST_NEIGHBOR
+
+OUTPUT_PROJECTION_TYPE = AEA
+
+OUTPUT_PROJECTION_PARAMETERS = ( 
+ 0.0 0.0 65.0
+ 55.0 -154.0 50.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0 )
+
+DATUM = NAD83
+
+OUTPUT_PIXEL_SIZE = 250
+
+

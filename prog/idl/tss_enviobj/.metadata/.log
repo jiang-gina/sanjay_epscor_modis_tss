@@ -1,0 +1,36 @@
+!SESSION 2015-06-18 13:46:07.122 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/jiang/projects/sanjay/prog/idl/tss_enviobj -os linux -ws gtk -arch x86_64
+
+!ENTRY com.perforce.team.core 2 0 2015-06-18 13:46:11.961
+!MESSAGE unable to get manifest version attribute: Not running from jar file: bundleresource://6.fwk29073669:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 2 0 2015-06-18 13:46:11.964
+!MESSAGE unable to get manifest date attribute: Not running from jar file: bundleresource://6.fwk29073669:1/com/perforce/p4java/Metadata.class
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.964
+!MESSAGE P4Java server factory loaded; version: Internal 2010.1 Perforce Development; date: unknown
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.965
+!MESSAGE Using default charset: UTF-8; JVM charset: UTF-8
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.966
+!MESSAGE Checking this Java for symbolic link support...
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.967
+!MESSAGE It seems this Java supports symbolic links.
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.968
+!MESSAGE Symbolic link support at the OS level will be determined at runtime...
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.968
+!MESSAGE initializing system file command helper class: java.io.File
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.968
+!MESSAGE Using default RPC system file command helper: com.perforce.p4java.impl.mapbased.rpc.sys.helper.RpcSystemFileCommandsHelper
+
+!ENTRY com.perforce.team.core 1 0 2015-06-18 13:46:11.968
+!MESSAGE setting RPC system file helper to class com.perforce.team.core.p4java.P4JavaSysFileCommandsHelper

@@ -1,0 +1,120 @@
+##############
+back up everything in /home/jiang/projects/sanjay to github
+
+cd ~/projections/sanjay
+
+git add .
+git commit -a -m "notes"
+git push
+
+remote repos
+
+github.alaska.edu jzhu4, 
+
+check if push is successful.
+
+
+
+
+1. MOD09GQ refers https://lpdaac.usgs.gov/products/modis_products_table/mod09gq
+
+2.download MODIS09GQ
+
+   /home/jiang/projects/sanjay/prog/py/download_MOD09GQ.py
+
+   three input parameters:date_st(yyyy.mm.dd), date_ed(yyyy.mm.dd),out_dir
+
+
+
+3. MRT mosaic and subsize data and produce geotif file for every SD in hdf file.
+
+   A. /home/jiang/projects/sanjay/prog/scripts/mosaic_date_range_tif.bash
+
+   two input parameters: start_date(yyyy.mm.dd), end_date(yyyy.mm.dd)
+
+   it calls mosaic_one_day_tif.bash with parameter file:/home/jiang/projects/sanjay/prog/scripts/modis_SE_AK_SIN_LINE_SAMPLE_tif.prm
+
+   output are 5 tif files for every day.
+
+   pay attention: 
+   
+   you must use INPUT_LINE_SAMPLE (Line=y, Sample=x) in parameter file.
+
+   SPATIAL_SUBSET_TYPE = INPUT_LINE_SAMPLE
+   
+   SPATIAL_SUBSET_UL_CORNER = (0     1320)
+   
+   SPATIAL_SUBSET_LR_CORNER = (2652  5737)
+
+   it keeps subsize match the original pixels.
+
+   if use input_lat_long, subsize pixels shift a liitle bit.
+
+   we want to keep the original project.
+
+   resample -i 2001001.hdf -o 2001001_tst3.tif -f -p modis_SE_AK_SIN_LINE_SAMPLE_tif.prm
+
+   pay attrention option -f, it means foreget about projection, only do subsize data.
+
+4. stack the data.
+
+   /home/jiang/projects/sanjay/prog/scripts/stack_one_year_tif.bash
+
+   input: name of file list for num_observations.tif files
+
+   output: one-year-stacked geotif files for every SD. totally are five geotif files.
+
+   it calls IDL program tss_main.pro to stack one-year of daily files and convert envi to geotif files.
+
+5. batch process MOD09GQ data
+
+~/projects/sanjay/prog/scripts/download_mosaic_stack_batch.bash YYYY
+
+it will produce 5 tif files for every year  in the directory /home/jzhu4/data/sanjay_data/YYYY
+
+You can change the location where data can be saved by editing download_mosaic_stack_batch.bash
+
+2015/7/31
+
+found stacked tif file do not includes projection info.
+
+investigate this, found reprojection single tif include projection, after idl to stack the one-year data, and output a pair of files, the projection info is included in the pair of files. but after we use ENVI  to trnafer the pair of files into a tif  file, the projection info is lost.
+
+From the expericence of developing of the modis NDVI and snow metrics algorithm, I think I need re-projet the mosaiced daily files into alaska albert, then do stacking.
+
+try jzhu4@panda:~/projects/sanjay/prog/scripts_v2
+
+mosaic->resample and re-projection->stack->a pair of files. The pair of files can be shown in ArcGIS correctly as long as the data file is re-named with affix img (that is raster->raster.img) and copy and keep both raster.img and raster.hdr in the same directory.
+
+The pair of files (even re-projected into Alaska Albers) is converted by convert_envi_tif.pro, the result tif file does not have correct map info in it. It can not be correct shown in ArcGIS.
+
+8/4/2015
+
+solution: read the single-band tof file, such as /home/jzhu4/data/sanjay_data/2014/01/2014.01.31/2014031_se_ak_aea.QC_250m_1.tif, get the geotag of this file, save,geotag,filename='/home/jzhu4/projects/sanjay/prog/idl/tss_enviobj/geotag.sav'.
+convert_to_tiff.pro input stacked file pair, and geotag.sav files, create stacked geotif file.
+
+scripts_v1 do not do re-projection, scripts_v2 do re-projection to Alaska Albers Conical Equal Area.
+
+2015/8/25,
+
+raw data are stored at 
+scripts_v1 do not do re-projection, scripts_v2 do re-projection to Alaska Albers Conical Equal Area.
+
+2015/8/25,
+ 
+raw data are stored at
+
+scripts_v1 do not do re-projection, scripts_v2 do re-projection to Alaska Albers Conical Equal Area.
+
+2015/8/25,
+ 
+raw data are stored at
+scripts_v1 do not do re-projection, scripts_v2 do re-projection to Alaska Albers Conical Equal Area.
+
+2015/8/25,
+
+raw data MOD09GQ.Ayyyydoy.h10v03.* and *h11v03* are stored at /home/jzhu4/data/sanjay_data
+
+immidiate data and final data are stored at /home/jzhu4/data/sanjay_data_dir2
+
+ 
