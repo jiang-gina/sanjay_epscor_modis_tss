@@ -11,7 +11,9 @@ git remote add origin git@github.com:jiang-gina/sanjay_epscor_modis_tss.git
 git push -u origin master
 
 
+users can downlaod the git repository
 
+https://github.com/jiang-gina/sanjay_epscor_modis_tss
 
 
 
